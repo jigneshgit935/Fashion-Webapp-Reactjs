@@ -1,7 +1,25 @@
 import { FaStar } from 'react-icons/fa';
+import { useAppDispatch } from '../redux/hooks';
+import { addToCart } from '../redux/features/cartSlice';
+import toast from 'react-hot-toast';
 
 // eslint-disable-next-line react/prop-types
 const ProductCard = ({ id, img, name, price, discount }) => {
+  // redux logic
+  const dispatch = useAppDispatch();
+
+  const addProductToCart = () => {
+    const payload = {
+      id,
+      img,
+      name,
+      price: parseFloat(price),
+      quantity: 1,
+    };
+
+    dispatch(addToCart(payload));
+    toast.success('Added to Cart successfully');
+  };
   return (
     <div
       key={id}
@@ -21,7 +39,10 @@ const ProductCard = ({ id, img, name, price, discount }) => {
           <h2 className="font-medium text-DarkColor">{discount}</h2>
         </div>
         <div className="flex gap-8 pt-4">
-          <button className="bg-ExtraDarkColor text-white px-4 py-2 font-medium active:bg-amber-800">
+          <button
+            onClick={addProductToCart}
+            className="bg-ExtraDarkColor text-white px-4 py-2 font-medium active:bg-amber-800"
+          >
             Add to Cart
           </button>
           <div className="flex gap-1 items-center">

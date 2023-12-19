@@ -1,3 +1,4 @@
+import { Provider } from 'react-redux';
 import Collections from './components/Collections';
 import Features from './components/Features';
 import Footer from './components/Footer';
@@ -6,31 +7,41 @@ import Navbar from './components/Navbar';
 import Product from './components/Product';
 import Review from './components/Review';
 import Shop from './components/Shop';
+import { store } from './redux/store';
+import { useState } from 'react';
+import Cart from './components/Cart';
 
 function App() {
+  const [showCart, setShowCart] = useState(false);
+
   return (
     <>
       <div>
-        <Navbar />
-        <div id="home">
-          <Home />
-        </div>
-        <div id="shop">
-          <Shop />
-        </div>
-        <Collections />
-        <div id="features">
-          <Features />
-        </div>
+        <Provider store={store}>
+          <Navbar setShowCart={setShowCart} />
 
-        <div id="products">
-          <Product />
-        </div>
+          {showCart && <Cart setShowCart={setShowCart} />}
 
-        <div id="review">
-          <Review />
-        </div>
-        <Footer />
+          <div id="home">
+            <Home />
+          </div>
+          <div id="shop">
+            <Shop />
+          </div>
+          <Collections />
+          <div id="features">
+            <Features />
+          </div>
+
+          <div id="products">
+            <Product />
+          </div>
+
+          <div id="review">
+            <Review />
+          </div>
+          <Footer />
+        </Provider>
       </div>
     </>
   );

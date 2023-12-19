@@ -3,8 +3,9 @@ import { FaUser, FaShoppingCart } from 'react-icons/fa';
 import { RiMenu2Line } from 'react-icons/ri';
 import { AiOutlineClose } from 'react-icons/ai';
 import { useState } from 'react';
+import { useAppSelector } from '../redux/hooks';
 
-const Navbar = () => {
+const Navbar = ({ setShowCart }) => {
   const [menu, setMenu] = useState(false);
 
   const handleChange = () => {
@@ -14,6 +15,8 @@ const Navbar = () => {
   const closeMenu = () => {
     setMenu(false);
   };
+
+  const cartCount = useAppSelector((state) => state.cartReducer.length);
 
   return (
     <header className="fixed w-full z-10">
@@ -83,10 +86,14 @@ const Navbar = () => {
           {/* nav icons */}
           <div className="flex items-center gap-5">
             <FaUser size={25} className="text-DarkColor cursor-pointer" />
-            <div className="text-DarkColor relative">
-              <FaShoppingCart size={25} className="cursor-pointer" />
-              <div className="absolute top-[-15px]  right-[-10px] bg-red-600 w-[22px] h-[20px] rounded-full text-white text-sm grid place-items-center">
-                0
+            <div className=" text-DarkColor relative">
+              <FaShoppingCart
+                size={25}
+                className=" cursor-pointer"
+                onClick={() => setShowCart(true)}
+              />
+              <div className=" absolute top-[-15px] right-[-10px] bg-red-600 w-[22px] h-[20px] rounded-full text-white text-sm grid place-items-center">
+                {cartCount}
               </div>
             </div>
           </div>
