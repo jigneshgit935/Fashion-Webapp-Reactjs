@@ -23,7 +23,7 @@ const Navbar = () => {
           <div>
             <Link to="home" spy={true} smooth={true} duration={500}>
               <h1 className="text-2xl font-semibold text-ExtraDarkColor cursor-pointer">
-                StyleNestle
+                CollectUrs
               </h1>
             </Link>
           </div>
