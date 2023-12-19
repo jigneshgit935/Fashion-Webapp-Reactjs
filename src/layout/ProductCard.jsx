@@ -1,5 +1,6 @@
 import { FaStar } from 'react-icons/fa';
 
+// eslint-disable-next-line react/prop-types
 const ProductCard = ({ id, img, name, price, discount }) => {
   return (
     <div
